@@ -19,6 +19,7 @@
 
                     <li> {{$user->username.' Email: '.$user->email}} </li>
                   @endforeach
+
                 </div>
             </div>
         </div>

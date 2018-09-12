@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SISTEM INFORMASI GRAND ATMA HOTEL</title>
+  <title>GRAND ATMA HOTEL INFORMATION SYSTEM</title>
 <!--
 Holiday Template
 http://www.templatemo.com/tm-475-holiday
@@ -26,6 +26,11 @@ http://www.templatemo.com/tm-475-holiday
   </head>
   <body class="tm-gray-bg">
   	<!-- Header -->
+    @if (session('alert'))
+    <div class="alert alert-success">
+        {{ session('alert') }}
+    </div>
+@endif
   	<div class="tm-header">
   		<div class="container">
   			<div class="row">
@@ -40,11 +45,10 @@ http://www.templatemo.com/tm-475-holiday
 		            </div>
 	  				<nav class="tm-nav">
 						<ul>
-
 							<li><a href="#"></a></li>
 							<li><a href="#"> </a></li>
-              <li><a href="/" class="active">PROMO</a></li>
-							<li><a href="/p3l/public/login" class="active">ACCOUNT</a></li>
+              <li><a href="{{url('/promo')}}" class="active">PROMO</a></li>
+							<li><a href="{{url('/login')}}" class="active">ACCOUNT</a></li>
 						</ul>
 					</nav>
 	  			</div>
@@ -96,44 +100,67 @@ http://www.templatemo.com/tm-475-holiday
 					<div class="tab-content">
 					    <div role="tabpanel" class="tab-pane fade in active tm-white-bg" id="hotel">
 					    	<div class="tm-search-box effect2">
-								<form action="/p3l/public/reservasi" method="post" class="hotel-search-form">
+								<form action="{{ route('reservasi')}}" method="POST" class="hotelw-search-form">
+                  @csrf
 									<div class="tm-form-inner">
 										<div class="form-group">
-							            	 <select class="form-control">
-							            	 	<option value="">-- Select Hotel -- </option>
-							         	<option value="bandung">Bandung</option>
-												<option value="jogja">Jogjakarta</option>
-											</select>
-							          	</div>
+  							        <select class="form-control" name="id_hotel" class="form-control{{ $errors->has('id_hotel') ? ' is-invalid' : '' }}"  value="{{ old('id_hotel') }}" required autofocus>
+  							          <option value="">-- Select City -- </option>
+  							         	<option value="2">Bandung</option>
+  												<option value="1">Jogjakarta</option>
+  											</select>
+							     	</div>
 							          	<div class="form-group">
 							                <div class='input-group date' id='datetimepicker1'>
-							                    <input type='text' class="form-control" placeholder="Check-in Date" />
+							                    <input type='text' class="form-control"  name="tanggalCheckin" placeholder="Check-in Date" />
 							                    <span class="input-group-addon">
 							                        <span class="fa fa-calendar"></span>
 							                    </span>
 							                </div>
 							            </div>
 							          	<div class="form-group">
-							                <div class='input-group date' id='datetimepicker2'>
-							                    <input type='text' class="form-control" placeholder="Check-out Date" />
+							                <div class='input-group date'  id='datetimepicker2' format='dd/mm/yyyy'>
+							                    <input type='text' class="form-control" name="tanggalCheckout" placeholder="Check-out Date" />
 							                    <span class="input-group-addon">
 							                        <span class="fa fa-calendar"></span>
 							                    </span>
 							                </div>
 							            </div>
 							            <div class="form-group margin-bottom-0">
-							                <select class="form-control">
-							            	 	<option value="">-- Guests -- </option>
-							            	 	<option value="1">1</option>
-												<option value="2">2</option>
-												<option value="3">3</option>
-												<option value="4">4</option>
-												<option value="5p">5+</option>
-											</select>
+							                <select class="form-control" name="dewasa" class="form-control{{ $errors->has('dewasa') ? ' is-invalid' : '' }}"  value="{{ old('dewasa') }}" required autofocus>
+  							            	 	<option value="0">-- Adult -- </option>
+  							            	 	<option value="1">1</option>
+        												<option value="2">2</option>
+        												<option value="3">3</option>
+        												<option value="4">4</option>
+        												<option value="5">5+</option>
+        											</select>
+							            </div>
+
+                          <div class="form-group margin-bottom-0">
+							                <select class="form-control" name="anak" class="form-control{{ $errors->has('anak') ? ' is-invalid' : '' }}"  value="{{ old('anak') }}" required autofocus>
+  							            	 	<option value="0">-- Child -- </option>
+  							            	 	<option value="1">1</option>
+        												<option value="2">2</option>
+        												<option value="3">3</option>
+        												<option value="4">4</option>
+        												<option value="5">5+</option>
+        											</select>
 							            </div>
 									</div>
+
+                  <input type="hidden" name="id_reservasi_status" value="4">
+                  <input type="hidden" name="id_pel" value="2">
+                  <input type="hidden" name="nama_institusi" value="sigah">
+                  <input type="hidden" name="id_peg" value="6">
+                  <input type="hidden" name="id_user" value="2">
+                  <input type="hidden" name="kode_reservasi" value={{$kode}}>
+                  <input type="hidden" name="urutan_reservasi" value="11">
+                  <input type="hidden" name="id_reservasi_tipe" value="1">
+                  <input type="hidden" name="periode_waktu_bayar" value="1:00:00">
+                  <input type="hidden" name="jumlah_kamar" value="12">
 						            <div class="form-group tm-yellow-gradient-bg text-center">
-						            	<button type="submit" name="submit" class="tm-yellow-btn" value="Check">Check Now</button>
+						            	<button type="submit" name="submit" class="tm-yellow-btn">Check Now</button>
 						            </div>
 								</form>
 							</div>
@@ -145,23 +172,23 @@ http://www.templatemo.com/tm-475-holiday
 			<div class="col-lg-4 col-md-4 col-sm-6">
 				<div class="tm-home-box-1 tm-home-box-1-2 tm-home-box-1-center">
 					<img src="img/index-01.jpg" alt="image" class="img-responsive">
-					<a href="#">
+
 						<div class="tm-green-gradient-bg tm-city-price-container">
 							<span>Room starts From</span>
 							<span>IDR 400K</span>
 						</div>
-					</a>
+
 				</div>
 			</div>
 			<div class="col-lg-4 col-md-4 col-sm-6">
 				<div class="tm-home-box-1 tm-home-box-1-2 tm-home-box-1-right">
 					<img src="img/index-02.jpg" alt="image" class="img-responsive">
-					<a href="#">
+
 						<div class="tm-red-gradient-bg tm-city-price-container">
 							<span>Services starts from</span>
 							<span>IDR 10K</span>
 						</div>
-					</a>
+
 				</div>
 			</div>
 		</div>
@@ -281,15 +308,19 @@ http://www.templatemo.com/tm-475-holiday
 		// HTML document is loaded. DOM is ready.
 		$(function() {
 
+
+
 			$('#hotelCarTabs a').click(function (e) {
 			  e.preventDefault()
 			  $(this).tab('show')
 			})
 
         	$('.date').datetimepicker({
-            	format: 'MM/DD/YYYY'
+            	format: 'DD-MM-YYYY',minDate:new Date()
             });
             $('.date-time').datetimepicker();
+
+
 
 			// https://css-tricks.com/snippets/jquery/smooth-scrolling/
 		  	$('a[href*=#]:not([href=#])').click(function() {

@@ -128,17 +128,6 @@
                             </div>
                         </div>
 
-                        <div>
-                            <label for="id_pel" ></label>
-
-                            <div class="col-md-6">
-                                <input id="id_pel" type="hidden"  name="id_pel" value="11">
-
-                            </div>
-                        </div>
-
-
-
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">

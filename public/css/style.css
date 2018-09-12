@@ -1,0 +1,16 @@
+#footer{
+  margin-top: 30px;
+  padding: 10px;
+  color: #000000;
+  background: #efd702
+}
+#footer p{
+  margin-bottom: 0px;
+}
+@media print
+{
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }
+}

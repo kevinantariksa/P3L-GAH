@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use App\Pelanggan;
 
 class LoginController extends Controller
 {
@@ -16,6 +19,11 @@ class LoginController extends Controller
     public function index()
     {
         //
+    }
+
+    public function promo()
+    {
+        return view('promo');
     }
 
     /**
@@ -99,8 +107,23 @@ class LoginController extends Controller
       $user_data = $request->except('_token');
 
       if (Auth::attempt($user_data)) {
-        return redirect('/home');
-      }else {
+
+        $user = Auth::user();
+        $pelanggan = Pelanggan::find($user->id_pel);
+        $login = $user->id_role;
+
+        if($login>="5")
+        {
+            return redirect('/home');
+        }
+        else {
+
+
+          return redirect('/admin');
+        }
+
+      }
+      else {
         return redirect()->route('login.user')->withErrors('Login gagal');
       }
     }
@@ -117,4 +140,12 @@ class LoginController extends Controller
 
       return 'username';
     }
+
+    public function adm(){
+      $admin = DB::table('users')->where('id_role','<',5)->get();
+      //dd($admin);
+
+      return view('/admdash',compact('admin'));
+    }
+
 }

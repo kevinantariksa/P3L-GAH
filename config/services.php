@@ -14,8 +14,12 @@ return [
     |
     */
 
+    'mandrill' => [
+         'secret' => env('788cd06677fba12e36249a1c3f663bac-us18'),
+     ],
+
     'mailgun' => [
-        'domain' => env('kevinp3l.mailgun.org'),
+        'domain' => env('sandbox468d64ffb6a7477798f8f8a6124d5a6a.mailgun.org'),
         'secret' => env('key-97e0968c917600395352ffa909c55686'),
     ],
 
@@ -34,5 +38,7 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
+
+
 
 ];

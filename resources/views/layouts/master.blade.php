@@ -10,11 +10,11 @@ Holiday Template
 http://www.templatemo.com/tm-475-holiday
 -->
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,700' rel='stylesheet' type='text/css'>
-  <link href="css/font-awesome.min.css" rel="stylesheet">
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-  <link href="css/flexslider.css" rel="stylesheet">
-  <link href="css/templatemo-style.css" rel="stylesheet">
+  <link href="{{url('css/font-awesome.min.css')}}" rel="stylesheet">
+  <link href="{{url('css/bootstrap.min.css')}}" rel="stylesheet">
+  <link href="{{url('css/bootstrap-datetimepicker.min.css')}}" rel="stylesheet">
+  <link href="{{url('css/flexslider.css')}}" rel="stylesheet">
+  <link href="{{url('css/templatemo-style.css')}}" rel="stylesheet">
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -30,8 +30,8 @@ http://www.templatemo.com/tm-475-holiday
   		<div class="container">
   			<div class="row">
   				<div class="col-lg-6 col-md-4 col-sm-3 tm-site-name-container">
-  					<a href="/p3l/public/" class="tm-site-name">
-              <img src="img/sigahlogo.png" alt="sigahlogo" height="60" width="60"> SIGAH
+  				<a href="{{url('/')}}" class="tm-site-name">
+              <img src="{{url('img/sigahlogo.png')}}" alt="sigahlogo" height="60" width="60"> SIGAH
             </a>
 
   				</div>
@@ -43,8 +43,8 @@ http://www.templatemo.com/tm-475-holiday
 						<ul>
               <li><a href="#"></a></li>
 							<li><a href="#"> </a></li>
-              <li><a href="/p3l/public/" class="active">PROMO</a></li>
-							<li><a href="/p3l/public/login" class="active">ACCOUNT</a></li>
+              <li><a href="{{url('/promo')}}" class="active">PROMO</a></li>
+              <li><a href="{{url('/login')}}" class="active">ACCOUNT</a></li>
 						</ul>
 					</nav>
 	  			</div>

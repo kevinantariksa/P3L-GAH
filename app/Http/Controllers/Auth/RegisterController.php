@@ -65,12 +65,13 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $idpel = Pelanggan::max('id_pel')+1;
         $user=User::create([
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'id_role' => $data['id_role'],
-            'id_pel' => $data['id_pel'],
+            'id_pel' => $idpel,
         ]);
         $pelanggan=Pelanggan::create([
           'nama'=>$data['nama'],
@@ -79,7 +80,7 @@ class RegisterController extends Controller
           'alamat' => $data['alamat'],
           'telp' => $data['telp'],
           'id_role' => $data['id_role'],
-          'id_pel' => $data['id_pel'],
+          'id_pel' => $idpel,
         ]);
 
         return $user;
